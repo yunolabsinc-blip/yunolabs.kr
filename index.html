@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>닥터체크Pro — 제약·의료 영업사원을 위한 병원 방문 관리</title>
+<meta name="description" content="진료시간 확인부터 방문 계획까지. 제약·의료 영업사원을 위한 병원 방문 스케줄 관리 서비스.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #111110; --gray-7: #3c3c3a; --gray-5: #7c7c78; --gray-3: #b4b2a9;
+    --gray-1: #f1efe8; --gray-0: #faf9f7; --white: #ffffff;
+    --coral: #D85A30; --coral-light: #FAECE7; --coral-dark: #993C1D;
+    --green: #1D9E75; --green-light: #E1F5EE; --green-dark: #085041;
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+    --border: 0.5px solid #e8e6e0;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: var(--white); color: var(--black); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: var(--border); padding: 0 1.5rem; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: baseline; gap: 2px; text-decoration: none; }
+  .nav-logo-main { font-size: 17px; font-weight: 700; color: var(--black); letter-spacing: -0.5px; }
+  .nav-logo-pro { font-size: 11px; font-weight: 700; color: var(--coral); letter-spacing: 0.5px; text-transform: uppercase; margin-left: 2px; }
+  .nav-login { font-size: 13px; font-weight: 500; color: var(--gray-7); text-decoration: none; padding: 6px 14px; border: var(--border); border-radius: 20px; transition: all 0.15s; }
+  .nav-login:hover { background: var(--gray-1); }
+
+  /* HERO */
+  .hero { padding: 5rem 1.5rem 4rem; text-align: center; max-width: 600px; margin: 0 auto; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--coral-dark); background: var(--coral-light); padding: 4px 12px; border-radius: 20px; margin-bottom: 1.5rem; }
+  .hero-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--coral); }
+  .hero-title { font-size: clamp(26px, 6vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.8px; color: var(--black); margin-bottom: 1rem; }
+  .hero-title em { font-style: normal; color: var(--coral); }
+  .hero-sub { font-size: 15px; color: var(--gray-5); line-height: 1.7; margin-bottom: 2rem; }
+  .hero-cta { display: inline-block; background: var(--black); color: var(--white); font-size: 15px; font-weight: 500; padding: 14px 32px; border-radius: var(--radius-sm); text-decoration: none; transition: opacity 0.15s; }
+  .hero-cta:hover { opacity: 0.8; }
+  .hero-note { font-size: 12px; color: var(--gray-3); margin-top: 0.75rem; }
+
+  /* SHARED */
+  .section { padding: 4rem 1.5rem; max-width: 640px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--gray-3); margin-bottom: 0.75rem; }
+  .section-title { font-size: clamp(20px, 4vw, 26px); font-weight: 700; letter-spacing: -0.5px; line-height: 1.35; margin-bottom: 1rem; }
+  .section-sub { font-size: 14px; color: var(--gray-5); line-height: 1.7; margin-bottom: 2rem; }
+  .section-divider { border: none; border-top: var(--border); }
+
+  /* PAIN */
+  .pain-list { display: flex; flex-direction: column; gap: 10px; }
+  .pain-item { display: flex; align-items: flex-start; gap: 10px; padding: 14px 16px; background: var(--gray-0); border-radius: var(--radius-sm); border: var(--border); }
+  .pain-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .pain-text { font-size: 14px; color: var(--gray-7); line-height: 1.55; }
+
+  /* FEATURES */
+  .features { background: var(--gray-0); padding: 4rem 1.5rem; }
+  .features-inner { max-width: 640px; margin: 0 auto; }
+  .feature-list { display: flex; flex-direction: column; gap: 1px; border: var(--border); border-radius: var(--radius-md); overflow: hidden; }
+  .feature-item { background: var(--white); padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 14px; transition: background 0.12s; }
+  .feature-item:hover { background: #fdfcfa; }
+  .feature-num { width: 26px; height: 26px; border-radius: 50%; background: var(--black); color: var(--white); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .feature-title { font-size: 15px; font-weight: 500; color: var(--black); margin-bottom: 3px; }
+  .feature-desc { font-size: 13px; color: var(--gray-5); line-height: 1.55; }
+
+  /* PRICING */
+  .pricing { padding: 4rem 1.5rem; max-width: 680px; margin: 0 auto; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 0.75rem; }
+  .plan-card { background: var(--white); border: var(--border); border-radius: var(--radius-lg); padding: 1.5rem; position: relative; display: flex; flex-direction: column; }
+  .plan-card.featured { border: 2px solid var(--black); }
+  .plan-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 700; padding: 2px 10px; border-radius: 20px; background: var(--black); color: var(--white); white-space: nowrap; }
+  .plan-name { font-size: 13px; font-weight: 500; color: var(--gray-5); margin-bottom: 0.5rem; }
+  .plan-price-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 0.25rem; }
+  .plan-price { font-size: 24px; font-weight: 700; color: var(--black); letter-spacing: -0.8px; line-height: 1; }
+  .plan-unit { font-size: 12px; color: var(--gray-5); }
+  .plan-original { font-size: 12px; color: var(--gray-3); text-decoration: line-through; margin-bottom: 0.25rem; min-height: 18px; }
+  .plan-discount { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--coral-light); color: var(--coral-dark); margin-bottom: 0.75rem; }
+  .plan-divider { border: none; border-top: var(--border); margin: 0.75rem 0; }
+  .plan-desc { font-size: 12px; color: var(--gray-5); line-height: 1.55; flex: 1; }
+  .plan-tag { font-size: 11px; font-weight: 500; color: var(--green); background: var(--green-light); padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 0.75rem; }
+  .plan-tag-gray { font-size: 11px; font-weight: 500; color: var(--gray-5); background: var(--gray-1); padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 0.75rem; }
+  .vat-note { font-size: 11px; color: var(--gray-3); margin-bottom: 1.5rem; }
+
+  /* ENTERPRISE MODAL */
+  .enterprise-box { background: var(--gray-0); border: var(--border); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .enterprise-title { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 3px; }
+  .enterprise-desc { font-size: 12px; color: var(--gray-5); line-height: 1.5; }
+  .enterprise-btn { font-size: 13px; font-weight: 500; color: var(--black); text-decoration: none; padding: 8px 16px; border: var(--border); border-radius: var(--radius-sm); background: var(--white); white-space: nowrap; transition: background 0.12s; flex-shrink: 0; cursor: pointer; font-family: inherit; }
+  .enterprise-btn:hover { background: var(--gray-1); }
+
+  /* MODAL OVERLAY */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalIn 0.2s ease;
+  }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .modal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+  .modal-title { font-size: 18px; font-weight: 700; color: var(--black); letter-spacing: -0.3px; }
+  .modal-sub { font-size: 13px; color: var(--gray-5); margin-top: 3px; line-height: 1.5; }
+  .modal-close { background: none; border: none; cursor: pointer; font-size: 20px; color: var(--gray-3); padding: 2px; line-height: 1; flex-shrink: 0; }
+  .modal-close:hover { color: var(--gray-5); }
+
+  /* FORM */
+  .form-group { margin-bottom: 1rem; }
+  .form-label { display: block; font-size: 13px; font-weight: 500; color: var(--gray-7); margin-bottom: 5px; }
+  .form-label span { color: var(--coral); margin-left: 2px; }
+  .form-input, .form-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--black);
+    background: var(--white);
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color 0.15s;
+    line-height: 1.5;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--black); }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--gray-3); }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .form-submit {
+    width: 100%;
+    padding: 13px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.15s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { opacity: 0.82; }
+  .form-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+  .form-note { font-size: 11px; color: var(--gray-3); text-align: center; margin-top: 0.6rem; }
+  .form-success { text-align: center; padding: 1.5rem 0; }
+  .form-success-icon { font-size: 32px; margin-bottom: 0.75rem; }
+  .form-success-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 0.4rem; }
+  .form-success-desc { font-size: 13px; color: var(--gray-5); line-height: 1.6; }
+
+  /* BETA CTA */
+  .beta-section { padding: 4rem 1.5rem; max-width: 480px; margin: 0 auto; }
+  .badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; }
+  .badge-hot { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--coral-light); color: var(--coral-dark); }
+  .badge-limit { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--gray-1); color: var(--gray-5); }
+  .beta-card { background: var(--white); border: var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
+  .beta-eyebrow { font-size: 11px; font-weight: 500; color: var(--gray-3); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .price-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 0.5rem; }
+  .price-original { font-size: 15px; color: var(--gray-3); text-decoration: line-through; }
+  .price-main { font-size: 32px; font-weight: 700; color: var(--black); line-height: 1; letter-spacing: -1px; }
+  .price-unit { font-size: 14px; color: var(--gray-5); }
+  .discount-pill { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: var(--coral-light); color: var(--coral-dark); }
+  .guarantee-line { font-size: 12px; color: var(--gray-5); margin-top: 0.4rem; }
+  .guarantee-line strong { color: var(--black); font-weight: 500; }
+  .beta-divider { border: none; border-top: var(--border); margin: 1rem 0; }
+  .value-headline { font-size: 15px; font-weight: 500; color: var(--black); line-height: 1.55; margin-bottom: 0.5rem; }
+  .value-sub { font-size: 13px; color: var(--gray-5); line-height: 1.6; }
+  .free-box { background: var(--green-light); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-bottom: 1rem; display: flex; gap: 10px; align-items: flex-start; }
+  .free-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 5px; }
+  .free-box-title { font-size: 14px; font-weight: 500; color: var(--green-dark); margin-bottom: 2px; }
+  .free-box-desc { font-size: 12px; color: #0F6E56; line-height: 1.55; }
+  .warning-line { font-size: 12px; color: var(--gray-3); display: flex; align-items: flex-start; gap: 8px; line-height: 1.6; margin-bottom: 1.25rem; }
+  .warning-accent { width: 2px; min-height: 36px; background: var(--coral); border-radius: 2px; flex-shrink: 0; margin-top: 2px; }
+
+  /* PRIMARY CTA BUTTON */
+  .cta-primary {
+    display: block;
+    width: 100%;
+    padding: 17px;
+    border-radius: var(--radius-sm);
+    background: var(--coral);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: -0.3px;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.15s, transform 0.1s;
+    box-shadow: 0 4px 20px rgba(216,90,48,0.28);
+  }
+  .cta-primary:hover { background: var(--coral-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(216,90,48,0.35); }
+  .cta-primary:active { transform: translateY(0); }
+  .cta-arrow { margin-left: 6px; font-style: normal; }
+  .sub-note { text-align: center; font-size: 11px; color: var(--gray-3); margin-top: 0.75rem; }
+
+  /* FOOTER */
+  footer { background: var(--gray-0); border-top: var(--border); padding: 2.5rem 1.5rem; }
+  .footer-inner { max-width: 640px; margin: 0 auto; }
+  .footer-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .footer-logo { font-size: 14px; font-weight: 700; color: var(--gray-7); letter-spacing: 0.3px; margin-bottom: 4px; }
+  .footer-logo-sub { font-size: 12px; color: var(--gray-3); }
+  .footer-links { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-start; padding-top: 2px; }
+  .footer-links a { font-size: 12px; color: var(--gray-3); text-decoration: none; transition: color 0.12s; }
+  .footer-links a:hover { color: var(--gray-5); }
+  .biz-info { border-top: var(--border); padding-top: 1.25rem; }
+  .biz-info p { font-size: 11px; color: var(--gray-3); line-height: 1.9; }
+  .biz-info a { color: var(--gray-3); text-decoration: none; }
+  .biz-info a:hover { color: var(--gray-5); }
+  .footer-copy { font-size: 11px; color: var(--gray-3); margin-top: 0.75rem; }
+
+  /* ANIM */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { animation: fadeUp 0.5s ease both; }
+  .hero-title { animation: fadeUp 0.5s 0.08s ease both; }
+  .hero-sub { animation: fadeUp 0.5s 0.16s ease both; }
+  .hero-cta { animation: fadeUp 0.5s 0.22s ease both; }
+  .hero-note { animation: fadeUp 0.5s 0.28s ease both; }
+
+  @media (max-width: 560px) {
+    nav { padding: 0 1rem; }
+    .hero { padding: 3.5rem 1rem 3rem; }
+    .section, .pricing, .beta-section { padding: 3rem 1rem; }
+    .features { padding: 3rem 1rem; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .enterprise-box { flex-direction: column; align-items: flex-start; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-main">닥터체크</span>
+    <span class="nav-logo-pro">Pro</span>
+  </a>
+  <a href="https://www.drcheckpro.com" class="nav-login">로그인</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow"><div class="hero-dot"></div>제약·의료 영업사원 전용</div>
+  <h1 class="hero-title">병원 홈페이지 뒤지는 시간,<br><em>영업에 쓰세요.</em></h1>
+  <p class="hero-sub">진료시간 확인부터 방문 계획, 활동 결과 기록까지.<br>영업사원에게 꼭 필요한 것만 담았습니다.</p>
+  <a href="https://www.drcheckpro.com" class="hero-cta">닥터체크Pro 시작하기</a>
+  <p class="hero-note">5월 정식 출시 전까지 완전 무료</p>
+</section>
+
+<hr class="section-divider">
+
+<!-- PAIN -->
+<section class="section">
+  <p class="section-label">이런 불편함, 있지 않으셨나요</p>
+  <h2 class="section-title">매일 반복되는<br>비효율을 없앱니다</h2>
+  <div class="pain-list">
+    <div class="pain-item"><span class="pain-icon">🔍</span><span class="pain-text">병원마다 홈페이지 들어가서 진료시간 일일이 확인하는 것</span></div>
+    <div class="pain-item"><span class="pain-icon">📋</span><span class="pain-text">엑셀·메모앱 여기저기 흩어진 방문 기록과 고객 정보</span></div>
+    <div class="pain-item"><span class="pain-icon">📅</span><span class="pain-text">이번 달 어느 병원을 얼마나 돌았는지 한눈에 파악이 안 되는 것</span></div>
+    <div class="pain-item"><span class="pain-icon">📝</span><span class="pain-text">방문 후 활동 결과를 따로 정리해야 하는 번거로움</span></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features-inner">
+    <p class="section-label">주요 기능</p>
+    <h2 class="section-title">영업 루틴을<br>하나로 정리합니다</h2>
+    <p class="section-sub">닥터체크Pro 하나로 하루 영업 흐름을 완성하세요.</p>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-num">1</div>
+        <div><div class="feature-title">병원별 진료시간 관리</div><div class="feature-desc">담당 병원의 진료시간을 직접 등록하고, 오늘 방문 가능한 곳만 빠르게 확인하세요.</div></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">2</div>
+        <div><div class="feature-title">방문 일정 계획 & 결과 기록</div><div class="feature-desc">활동 계획을 세우고, 방문 후 결과를 바로 기록합니다. 모든 이력이 자동으로 쌓입니다.</div></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">3</div>
+        <div><div class="feature-title">고객(병원) 정보 통합 관리</div><div class="feature-desc">병원명, 담당 원장, 연락처, 방문 이력을 한 곳에서 관리합니다.</div></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">4</div>
+        <div><div class="feature-title">활동 데이터 엑셀 내보내기</div><div class="feature-desc">월별 활동 데이터를 엑셀로 내보내 보고서 작성에 바로 활용하세요.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <p class="section-label">요금제</p>
+  <h2 class="section-title">합리적인 가격,<br>영업 성과로 돌아옵니다</h2>
+  <p class="section-sub">모든 요금제는 VAT 포함 가격입니다.</p>
+
+  <div class="pricing-grid">
+    <div class="plan-card featured">
+      <div class="plan-badge">선착순 200명 한정</div>
+      <div class="plan-name">베타 멤버</div>
+      <div class="plan-price-row"><span class="plan-price">4,950</span><span class="plan-unit">원/월</span></div>
+      <div class="plan-original">19,800원</div>
+      <div class="plan-discount">75% 할인 · 평생 보장</div>
+      <hr class="plan-divider">
+      <div class="plan-desc">지금 가입하면 정식 출시 후에도 이 가격이 영구 적용됩니다.</div>
+      <span class="plan-tag">5월 출시 전까지 무료</span>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">얼리버드</div>
+      <div class="plan-price-row"><span class="plan-price">9,900</span><span class="plan-unit">원/월</span></div>
+      <div class="plan-original">19,800원</div>
+      <div class="plan-discount">50% 할인</div>
+      <hr class="plan-divider">
+      <div class="plan-desc">베타 마감 후 2026년 7월 31일까지 가입 시 적용됩니다.</div>
+      <span class="plan-tag-gray">~2026년 7월 31일</span>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">정식가</div>
+      <div class="plan-price-row"><span class="plan-price">19,800</span><span class="plan-unit">원/월</span></div>
+      <div class="plan-original" style="visibility:hidden;">-</div>
+      <div class="plan-discount" style="visibility:hidden;">-</div>
+      <hr class="plan-divider">
+      <div class="plan-desc">2026년 8월 1일부터 신규 가입 시 적용되는 기본 요금입니다.</div>
+      <span class="plan-tag-gray">2026년 8월~</span>
+    </div>
+  </div>
+
+  <p class="vat-note">* 모든 가격은 부가세(VAT) 포함 금액입니다.</p>
+
+  <div class="enterprise-box">
+    <div>
+      <div class="enterprise-title">팀·기업 도입을 검토하고 계신가요?</div>
+      <div class="enterprise-desc">영업팀 단위 도입, 계정 일괄 관리 등 기업 맞춤 플랜을 제공합니다.</div>
+    </div>
+    <button class="enterprise-btn" onclick="openModal()">도입 문의하기 →</button>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- BETA CTA -->
+<section class="beta-section" id="beta">
+  <div class="badge-row">
+    <span class="badge-hot">베타 멤버 한정</span>
+    <span class="badge-limit">선착순 200명</span>
+  </div>
+  <div class="beta-card">
+    <div class="beta-eyebrow">베타 멤버 가격 · 평생 보장</div>
+    <div class="price-row">
+      <span class="price-original">19,800원</span>
+      <span class="price-main">4,950</span>
+      <span class="price-unit">원/월</span>
+      <span class="discount-pill">75% 할인</span>
+    </div>
+    <div class="guarantee-line">지금 가입하면 <strong>이 가격이 평생 유지</strong>됩니다</div>
+    <hr class="beta-divider">
+    <div class="value-headline">진료시간 확인부터 방문 계획까지,<br>더 이상 병원 홈페이지를 뒤지지 않아도 됩니다.</div>
+    <div class="value-sub">방문 1건만 더 성사시켜도 본전, 그 이상은 순수 수익입니다.</div>
+  </div>
+  <div class="free-box">
+    <div class="free-dot"></div>
+    <div>
+      <div class="free-box-title">5월 정식 출시 전까지 완전 무료</div>
+      <div class="free-box-desc">지금 가입하고 출시 전까지 모든 기능을 무료로 사용하세요.</div>
+    </div>
+  </div>
+  <div class="warning-line">
+    <div class="warning-accent"></div>
+    <span>베타 마감 후에는 이 가격으로 다시 가입할 수 없습니다. 정식 출시 시 월 19,800원이 적용됩니다.</span>
+  </div>
+  <a href="https://www.drcheckpro.com" class="cta-primary">
+    닥터체크Pro 바로 시작하기 <em class="cta-arrow">→</em>
+  </a>
+  <p class="sub-note">언제든 해지 가능</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">YUNOLABS</div>
+        <div class="footer-logo-sub">제약·의료 영업을 더 스마트하게</div>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.drcheckpro.com">닥터체크Pro</a>
+        <a href="#" onclick="openModal(); return false;">기업 문의</a>
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+      </div>
+    </div>
+    <div class="biz-info">
+      <p>
+        주식회사 유노랩스 (YUNOLABS.INC) &nbsp;|&nbsp; 대표이사: 이윤호<br>
+        사업자등록번호: 824-88-03207 &nbsp;|&nbsp; 통신판매신고: 제2025-다산-0943호<br>
+        주소: 경기도 남양주시 다산중앙로145번길 15, 807호<br>
+        고객센터: <a href="tel:05040500979">0504-050-0979</a> &nbsp;|&nbsp; 이메일: <a href="mailto:yunolabs.inc@gmail.com">yunolabs.inc@gmail.com</a>
+      </p>
+      <p class="footer-copy">© 2026 주식회사 유노랩스. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ENTERPRISE MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">기업·팀 도입 문의</div>
+        <div class="modal-sub">담당자가 확인 후 1~2 영업일 이내 연락드립니다.</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+
+    <div id="form-wrap">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">회사명<span>*</span></label>
+          <input class="form-input" type="text" id="f-company" placeholder="주식회사 예시" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">담당자명<span>*</span></label>
+          <input class="form-input" type="text" id="f-name" placeholder="홍길동" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">연락처<span>*</span></label>
+          <input class="form-input" type="tel" id="f-phone" placeholder="010-0000-0000" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">이메일 주소<span>*</span></label>
+          <input class="form-input" type="email" id="f-email" placeholder="example@company.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">도입 예정 인원</label>
+        <input class="form-input" type="text" id="f-headcount" placeholder="예: 영업팀 15명" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">문의 내용<span>*</span></label>
+        <textarea class="form-textarea" id="f-message" placeholder="도입 목적, 궁금한 사항 등 자유롭게 작성해 주세요."></textarea>
+      </div>
+      <button class="form-submit" id="submit-btn" onclick="submitForm()">문의 보내기</button>
+      <p class="form-note">* 표시는 필수 입력 항목입니다.</p>
+    </div>
+
+    <div id="form-success" class="form-success" style="display:none;">
+      <div class="form-success-icon">✅</div>
+      <div class="form-success-title">문의가 접수되었습니다</div>
+      <div class="form-success-desc">담당자가 확인 후 1~2 영업일 이내<br>입력하신 연락처로 연락드리겠습니다.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+function submitForm() {
+  var company  = document.getElementById('f-company').value.trim();
+  var name     = document.getElementById('f-name').value.trim();
+  var phone    = document.getElementById('f-phone').value.trim();
+  var email    = document.getElementById('f-email').value.trim();
+  var headcount= document.getElementById('f-headcount').value.trim();
+  var message  = document.getElementById('f-message').value.trim();
+
+  if (!company || !name || !phone || !email || !message) {
+    alert('필수 항목을 모두 입력해 주세요.');
+    return;
+  }
+
+  var subject = encodeURIComponent('[닥터체크Pro] 기업·팀 도입 문의 — ' + company);
+  var body = encodeURIComponent(
+    '■ 회사명: ' + company + '\n' +
+    '■ 담당자명: ' + name + '\n' +
+    '■ 연락처: ' + phone + '\n' +
+    '■ 이메일: ' + email + '\n' +
+    '■ 도입 예정 인원: ' + (headcount || '미입력') + '\n\n' +
+    '■ 문의 내용\n' + message
+  );
+
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '전송 중...';
+
+  window.location.href = 'mailto:yunolabs.inc@gmail.com?subject=' + subject + '&body=' + body;
+
+  setTimeout(function() {
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }, 800);
+}
+</script>
+
+</body>
+</html>
