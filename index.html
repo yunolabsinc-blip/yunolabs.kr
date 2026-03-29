@@ -8,241 +8,514 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --black: #111110; --gray-7: #3c3c3a; --gray-5: #7c7c78; --gray-3: #b4b2a9;
-    --gray-1: #f1efe8; --gray-0: #faf9f7; --white: #ffffff;
-    --coral: #D85A30; --coral-light: #FAECE7; --coral-dark: #993C1D;
-    --green: #1D9E75; --green-light: #E1F5EE; --green-dark: #085041;
-    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
-    --border: 0.5px solid #e8e6e0;
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: var(--white); color: var(--black); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* NAV */
-  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: var(--border); padding: 0 1.5rem; height: 56px; display: flex; align-items: center; justify-content: space-between; }
-  .nav-logo { display: flex; align-items: baseline; gap: 2px; text-decoration: none; }
-  .nav-logo-main { font-size: 17px; font-weight: 700; color: var(--black); letter-spacing: -0.5px; }
-  .nav-logo-pro { font-size: 11px; font-weight: 700; color: var(--coral); letter-spacing: 0.5px; text-transform: uppercase; margin-left: 2px; }
-  .nav-login { font-size: 13px; font-weight: 500; color: var(--gray-7); text-decoration: none; padding: 6px 14px; border: var(--border); border-radius: 20px; transition: all 0.15s; }
-  .nav-login:hover { background: var(--gray-1); }
+:root {
+  /* 기본 */
+  --black:        #111110;
+  --gray-8:       #2a2a28;
+  --gray-6:       #555552;
+  --gray-4:       #9c9a94;
+  --gray-2:       #d4d2ca;
+  --gray-1:       #eeecea;
+  --gray-0:       #f7f6f3;
+  --white:        #ffffff;
 
-  /* HERO */
-  .hero { padding: 5rem 1.5rem 4rem; text-align: center; max-width: 600px; margin: 0 auto; }
-  .hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--coral-dark); background: var(--coral-light); padding: 4px 12px; border-radius: 20px; margin-bottom: 1.5rem; }
-  .hero-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--coral); }
-  .hero-title { font-size: clamp(26px, 6vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.8px; color: var(--black); margin-bottom: 1rem; }
-  .hero-title em { font-style: normal; color: var(--coral); }
-  .hero-sub { font-size: 15px; color: var(--gray-5); line-height: 1.7; margin-bottom: 2rem; }
-  .hero-cta { display: inline-block; background: var(--coral); color: var(--white); font-size: 15px; font-weight: 700; padding: 14px 32px; border-radius: var(--radius-sm); text-decoration: none; transition: background 0.15s, transform 0.1s; box-shadow: 0 4px 20px rgba(216,90,48,0.28); }
-  .hero-cta:hover { background: var(--coral-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(216,90,48,0.35); }
-  .hero-note { font-size: 12px; color: var(--gray-3); margin-top: 0.75rem; }
+  /* 포인트 — 코럴 오렌지 */
+  --coral:        #D85A30;
+  --coral-hover:  #bf4f28;
+  --coral-light:  #fdf0eb;
+  --coral-mid:    #f5c4ae;
+  --coral-dark:   #7a2e14;
 
-  /* SHARED */
-  .section { padding: 4rem 1.5rem; max-width: 640px; margin: 0 auto; }
-  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--gray-3); margin-bottom: 0.75rem; }
-  .section-title { font-size: clamp(20px, 4vw, 26px); font-weight: 700; letter-spacing: -0.5px; line-height: 1.35; margin-bottom: 1rem; }
-  .section-sub { font-size: 14px; color: var(--gray-5); line-height: 1.7; margin-bottom: 2rem; }
-  .section-divider { border: none; border-top: var(--border); }
+  /* 보조 — 그린 (무료/완료 상태만) */
+  --green:        #1D9E75;
+  --green-light:  #eaf7f2;
+  --green-dark:   #0a5c43;
 
-  /* PAIN */
-  .pain-list { display: flex; flex-direction: column; gap: 10px; }
-  .pain-item { display: flex; align-items: flex-start; gap: 10px; padding: 14px 16px; background: var(--gray-0); border-radius: var(--radius-sm); border: var(--border); }
-  .pain-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-  .pain-text { font-size: 14px; color: var(--gray-7); line-height: 1.55; }
+  /* 공통 */
+  --radius-sm:    8px;
+  --radius-md:    12px;
+  --radius-lg:    16px;
+  --radius-xl:    24px;
+  --border:       1px solid #e8e5e0;
+  --border-light: 1px solid #f0ede8;
+}
 
-  /* FEATURES */
-  .features { background: var(--gray-0); padding: 4rem 1.5rem; }
-  .features-inner { max-width: 640px; margin: 0 auto; }
-  .feature-list { display: flex; flex-direction: column; gap: 1px; border: var(--border); border-radius: var(--radius-md); overflow: hidden; }
-  .feature-item { background: var(--white); padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 14px; transition: background 0.12s; }
-  .feature-item:hover { background: #fdfcfa; }
-  .feature-num { width: 26px; height: 26px; border-radius: 50%; background: var(--black); color: var(--white); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-  .feature-title { font-size: 15px; font-weight: 500; color: var(--black); margin-bottom: 3px; }
-  .feature-desc { font-size: 13px; color: var(--gray-5); line-height: 1.55; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  background: var(--white);
+  color: var(--black);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* PRICING */
-  .pricing { padding: 4rem 1.5rem; max-width: 680px; margin: 0 auto; }
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 0.75rem; }
-  .plan-card { background: var(--white); border: var(--border); border-radius: var(--radius-lg); padding: 1.5rem; position: relative; display: flex; flex-direction: column; }
-  .plan-card.featured { border: 2px solid var(--black); }
-  .plan-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 700; padding: 2px 10px; border-radius: 20px; background: var(--black); color: var(--white); white-space: nowrap; }
-  .plan-name { font-size: 13px; font-weight: 500; color: var(--gray-5); margin-bottom: 0.5rem; }
-  .plan-price-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 0.25rem; }
-  .plan-price { font-size: 24px; font-weight: 700; color: var(--black); letter-spacing: -0.8px; line-height: 1; }
-  .plan-unit { font-size: 12px; color: var(--gray-5); }
-  .plan-original { font-size: 12px; color: var(--gray-3); text-decoration: line-through; margin-bottom: 0.25rem; min-height: 18px; }
-  .plan-discount { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--coral-light); color: var(--coral-dark); margin-bottom: 0.75rem; }
-  .plan-divider { border: none; border-top: var(--border); margin: 0.75rem 0; }
-  .plan-desc { font-size: 12px; color: var(--gray-5); line-height: 1.55; flex: 1; }
-  .plan-tag { font-size: 11px; font-weight: 500; color: var(--green); background: var(--green-light); padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 0.75rem; }
-  .plan-tag-gray { font-size: 11px; font-weight: 500; color: var(--gray-5); background: var(--gray-1); padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 0.75rem; }
-  .vat-note { font-size: 11px; color: var(--gray-3); margin-bottom: 1.5rem; }
+/* ─── NAV ─────────────────────────────────── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: var(--border-light);
+  padding: 0 2rem; height: 58px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: baseline; gap: 1px; text-decoration: none; }
+.nav-logo-main { font-size: 17px; font-weight: 700; color: var(--black); letter-spacing: -0.5px; }
+.nav-logo-pro {
+  font-size: 10px; font-weight: 700; color: var(--white);
+  background: var(--coral); padding: 2px 6px;
+  border-radius: 4px; letter-spacing: 0.4px;
+  text-transform: uppercase; margin-left: 4px;
+  vertical-align: middle; position: relative; top: -1px;
+}
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.nav-inquiry {
+  font-size: 13px; font-weight: 500; color: var(--gray-6);
+  background: none; border: none; cursor: pointer;
+  font-family: inherit; padding: 6px 12px;
+  border-radius: var(--radius-sm); transition: background 0.12s;
+}
+.nav-inquiry:hover { background: var(--gray-1); }
+.nav-login {
+  font-size: 13px; font-weight: 500; color: var(--white);
+  background: var(--coral); text-decoration: none;
+  padding: 7px 16px; border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+.nav-login:hover { background: var(--coral-hover); }
 
-  /* ENTERPRISE MODAL */
-  .enterprise-box { background: var(--black); border-radius: var(--radius-md); padding: 1.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; flex-wrap: wrap; }
-  .enterprise-title { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 5px; letter-spacing: -0.3px; }
-  .enterprise-desc { font-size: 13px; color: var(--gray-3); line-height: 1.55; }
-  .enterprise-btn { font-size: 13px; font-weight: 700; color: var(--black); text-decoration: none; padding: 10px 20px; border-radius: var(--radius-sm); background: var(--white); white-space: nowrap; transition: opacity 0.15s; flex-shrink: 0; cursor: pointer; font-family: inherit; border: none; }
-  .enterprise-btn:hover { opacity: 0.85; }
+/* ─── HERO ────────────────────────────────── */
+.hero {
+  padding: 6rem 2rem 5rem;
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 500;
+  color: var(--coral-dark); background: var(--coral-light);
+  border: 1px solid var(--coral-mid);
+  padding: 5px 14px; border-radius: 20px;
+  margin-bottom: 1.75rem;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--coral); flex-shrink: 0;
+}
+.hero-title {
+  font-size: clamp(28px, 6vw, 40px);
+  font-weight: 700; line-height: 1.25;
+  letter-spacing: -1px; color: var(--black);
+  margin-bottom: 1.1rem;
+}
+.hero-title em { font-style: normal; color: var(--coral); }
+.hero-sub {
+  font-size: 15px; color: var(--gray-6);
+  line-height: 1.75; margin-bottom: 2.25rem;
+}
+.hero-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--coral); color: var(--white);
+  font-size: 15px; font-weight: 700;
+  padding: 15px 36px; border-radius: var(--radius-sm);
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(216,90,48,0.30);
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+.hero-btn:hover {
+  background: var(--coral-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(216,90,48,0.38);
+}
+.hero-note { font-size: 12px; color: var(--gray-4); margin-top: 0.85rem; }
 
-  /* MODAL OVERLAY */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.2s, visibility 0.2s;
-    pointer-events: none;
-  }
-  .modal-overlay.open { visibility: visible; opacity: 1; pointer-events: auto; }
-  .modal {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    width: 100%;
-    max-width: 480px;
-    max-height: 90vh;
-    overflow-y: auto;
-    animation: modalIn 0.2s ease;
-  }
-  @keyframes modalIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-  .modal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
-  .modal-title { font-size: 18px; font-weight: 700; color: var(--black); letter-spacing: -0.3px; }
-  .modal-sub { font-size: 13px; color: var(--gray-5); margin-top: 3px; line-height: 1.5; }
-  .modal-close { background: none; border: none; cursor: pointer; font-size: 20px; color: var(--gray-3); padding: 2px; line-height: 1; flex-shrink: 0; }
-  .modal-close:hover { color: var(--gray-5); }
+/* ─── DIVIDER ─────────────────────────────── */
+.divider { border: none; border-top: var(--border-light); }
 
-  /* FORM */
-  .form-group { margin-bottom: 1rem; }
-  .form-label { display: block; font-size: 13px; font-weight: 500; color: var(--gray-7); margin-bottom: 5px; }
-  .form-label span { color: var(--coral); margin-left: 2px; }
-  .form-input, .form-textarea {
-    width: 100%;
-    padding: 10px 12px;
-    font-size: 14px;
-    font-family: inherit;
-    color: var(--black);
-    background: var(--white);
-    border: var(--border);
-    border-radius: var(--radius-sm);
-    outline: none;
-    transition: border-color 0.15s;
-    line-height: 1.5;
-  }
-  .form-input:focus, .form-textarea:focus { border-color: var(--black); }
-  .form-input::placeholder, .form-textarea::placeholder { color: var(--gray-3); }
-  .form-textarea { resize: vertical; min-height: 100px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .form-submit {
-    width: 100%;
-    padding: 13px;
-    background: var(--black);
-    color: var(--white);
-    font-size: 14px;
-    font-weight: 500;
-    border: none;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-family: inherit;
-    transition: opacity 0.15s;
-    margin-top: 0.5rem;
-  }
-  .form-submit:hover { opacity: 0.82; }
-  .form-submit:disabled { opacity: 0.4; cursor: not-allowed; }
-  .form-note { font-size: 11px; color: var(--gray-3); text-align: center; margin-top: 0.6rem; }
-  .form-success { text-align: center; padding: 1.5rem 0; }
-  .form-success-icon { font-size: 32px; margin-bottom: 0.75rem; }
-  .form-success-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 0.4rem; }
-  .form-success-desc { font-size: 13px; color: var(--gray-5); line-height: 1.6; }
+/* ─── SECTION BASE ────────────────────────── */
+.section { padding: 4.5rem 2rem; max-width: 660px; margin: 0 auto; }
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+  text-transform: uppercase; color: var(--coral);
+  margin-bottom: 0.6rem;
+}
+.section-title {
+  font-size: clamp(22px, 4vw, 28px); font-weight: 700;
+  letter-spacing: -0.6px; line-height: 1.3;
+  margin-bottom: 0.9rem; color: var(--black);
+}
+.section-sub {
+  font-size: 14px; color: var(--gray-6);
+  line-height: 1.75; margin-bottom: 2rem;
+}
 
-  /* BETA CTA */
-  .beta-section { padding: 4rem 1.5rem; max-width: 480px; margin: 0 auto; }
-  .badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; }
-  .badge-hot { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--coral-light); color: var(--coral-dark); }
-  .badge-limit { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--gray-1); color: var(--gray-5); }
-  .beta-card { background: var(--white); border: var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
-  .beta-eyebrow { font-size: 11px; font-weight: 500; color: var(--gray-3); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 0.75rem; }
-  .price-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 0.5rem; }
-  .price-original { font-size: 15px; color: var(--gray-3); text-decoration: line-through; }
-  .price-main { font-size: 32px; font-weight: 700; color: var(--black); line-height: 1; letter-spacing: -1px; }
-  .price-unit { font-size: 14px; color: var(--gray-5); }
-  .discount-pill { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: var(--coral-light); color: var(--coral-dark); }
-  .guarantee-line { font-size: 12px; color: var(--gray-5); margin-top: 0.4rem; }
-  .guarantee-line strong { color: var(--black); font-weight: 500; }
-  .beta-divider { border: none; border-top: var(--border); margin: 1rem 0; }
-  .value-headline { font-size: 15px; font-weight: 500; color: var(--black); line-height: 1.55; margin-bottom: 0.5rem; }
-  .value-sub { font-size: 13px; color: var(--gray-5); line-height: 1.6; }
-  .free-box { background: var(--green-light); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-bottom: 1rem; display: flex; gap: 10px; align-items: flex-start; }
-  .free-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 5px; }
-  .free-box-title { font-size: 14px; font-weight: 500; color: var(--green-dark); margin-bottom: 2px; }
-  .free-box-desc { font-size: 12px; color: #0F6E56; line-height: 1.55; }
-  .warning-line { font-size: 12px; color: var(--gray-3); display: flex; align-items: flex-start; gap: 8px; line-height: 1.6; margin-bottom: 1.25rem; }
-  .warning-accent { width: 2px; min-height: 36px; background: var(--coral); border-radius: 2px; flex-shrink: 0; margin-top: 2px; }
+/* ─── PAIN ────────────────────────────────── */
+.pain-list { display: flex; flex-direction: column; gap: 10px; }
+.pain-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 15px 18px;
+  background: var(--gray-0);
+  border: var(--border-light); border-radius: var(--radius-md);
+  transition: border-color 0.15s;
+}
+.pain-item:hover { border-color: var(--coral-mid); }
+.pain-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--coral-light); color: var(--coral);
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.pain-text { font-size: 14px; color: var(--gray-6); line-height: 1.6; }
 
-  /* PRIMARY CTA BUTTON */
-  .cta-primary {
-    display: block;
-    width: 100%;
-    padding: 17px;
-    border-radius: var(--radius-sm);
-    background: var(--coral);
-    color: var(--white);
-    font-size: 16px;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    letter-spacing: -0.3px;
-    text-decoration: none;
-    text-align: center;
-    transition: background 0.15s, transform 0.1s;
-    box-shadow: 0 4px 20px rgba(216,90,48,0.28);
-  }
-  .cta-primary:hover { background: var(--coral-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(216,90,48,0.35); }
-  .cta-primary:active { transform: translateY(0); }
-  .cta-arrow { margin-left: 6px; font-style: normal; }
-  .sub-note { text-align: center; font-size: 11px; color: var(--gray-3); margin-top: 0.75rem; }
+/* ─── FEATURES ────────────────────────────── */
+.features { background: var(--gray-0); padding: 4.5rem 2rem; }
+.features-inner { max-width: 660px; margin: 0 auto; }
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.feature-card {
+  background: var(--white);
+  border: var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.feature-card:hover {
+  border-color: var(--coral-mid);
+  box-shadow: 0 4px 16px rgba(216,90,48,0.08);
+}
+.feature-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  background: var(--coral-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; margin-bottom: 0.9rem;
+}
+.feature-title { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
+.feature-desc { font-size: 13px; color: var(--gray-6); line-height: 1.6; }
 
-  /* FOOTER */
-  footer { background: var(--gray-0); border-top: var(--border); padding: 2.5rem 1.5rem; }
-  .footer-inner { max-width: 640px; margin: 0 auto; }
-  .footer-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .footer-logo { font-size: 14px; font-weight: 700; color: var(--gray-7); letter-spacing: 0.3px; margin-bottom: 4px; }
-  .footer-logo-sub { font-size: 12px; color: var(--gray-3); }
-  .footer-links { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-start; padding-top: 2px; }
-  .footer-links a { font-size: 12px; color: var(--gray-3); text-decoration: none; transition: color 0.12s; }
-  .footer-links a:hover { color: var(--gray-5); }
-  .biz-info { border-top: var(--border); padding-top: 1.25rem; }
-  .biz-info p { font-size: 11px; color: var(--gray-3); line-height: 1.9; }
-  .biz-info a { color: var(--gray-3); text-decoration: none; }
-  .biz-info a:hover { color: var(--gray-5); }
-  .footer-copy { font-size: 11px; color: var(--gray-3); margin-top: 0.75rem; }
+/* ─── PRICING ─────────────────────────────── */
+.pricing { padding: 4.5rem 2rem; max-width: 700px; margin: 0 auto; }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 0.75rem;
+}
+.plan-card {
+  background: var(--white);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  position: relative;
+  display: flex; flex-direction: column;
+}
+.plan-card.featured {
+  border-color: var(--coral);
+  border-width: 2px;
+  background: var(--coral-light);
+}
+.plan-top-badge {
+  position: absolute; top: -12px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px; font-weight: 700;
+  padding: 3px 12px; border-radius: 20px;
+  background: var(--coral); color: var(--white);
+  white-space: nowrap; letter-spacing: 0.3px;
+}
+.plan-name {
+  font-size: 12px; font-weight: 700;
+  color: var(--gray-4); letter-spacing: 0.5px;
+  text-transform: uppercase; margin-bottom: 0.75rem;
+}
+.plan-card.featured .plan-name { color: var(--coral); }
+.plan-price-row {
+  display: flex; align-items: baseline;
+  gap: 4px; margin-bottom: 3px;
+}
+.plan-price {
+  font-size: 26px; font-weight: 700;
+  color: var(--black); letter-spacing: -1px; line-height: 1;
+}
+.plan-unit { font-size: 12px; color: var(--gray-4); }
+.plan-original {
+  font-size: 12px; color: var(--gray-4);
+  text-decoration: line-through; margin-bottom: 4px; min-height: 18px;
+}
+.plan-chip {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  padding: 2px 9px; border-radius: 20px;
+  background: var(--coral); color: var(--white);
+  margin-bottom: 0.9rem;
+}
+.plan-chip.gray {
+  background: var(--gray-1); color: var(--gray-6);
+}
+.plan-divider { border: none; border-top: var(--border-light); margin: 0.9rem 0; }
+.plan-desc { font-size: 12px; color: var(--gray-6); line-height: 1.6; flex: 1; }
+.plan-tag {
+  display: inline-block; font-size: 11px; font-weight: 500;
+  padding: 3px 9px; border-radius: 20px; margin-top: 0.75rem;
+}
+.plan-tag.green { background: var(--green-light); color: var(--green-dark); }
+.plan-tag.gray { background: var(--gray-1); color: var(--gray-6); }
 
-  /* ANIM */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-eyebrow { animation: fadeUp 0.5s ease both; }
-  .hero-title { animation: fadeUp 0.5s 0.08s ease both; }
-  .hero-sub { animation: fadeUp 0.5s 0.16s ease both; }
-  .hero-cta { animation: fadeUp 0.5s 0.22s ease both; }
-  .hero-note { animation: fadeUp 0.5s 0.28s ease both; }
+.vat-note { font-size: 11px; color: var(--gray-4); margin-bottom: 1.75rem; }
 
-  @media (max-width: 560px) {
-    nav { padding: 0 1rem; }
-    .hero { padding: 3.5rem 1rem 3rem; }
-    .section, .pricing, .beta-section { padding: 3rem 1rem; }
-    .features { padding: 3rem 1rem; }
-    .pricing-grid { grid-template-columns: 1fr; }
-    .enterprise-box { flex-direction: column; align-items: flex-start; }
-    .form-row { grid-template-columns: 1fr; }
-  }
+/* ─── ENTERPRISE ──────────────────────────── */
+.enterprise-box {
+  background: var(--black);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem; flex-wrap: wrap;
+}
+.enterprise-left {}
+.enterprise-eyebrow {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--coral); margin-bottom: 5px;
+}
+.enterprise-title {
+  font-size: 17px; font-weight: 700;
+  color: var(--white); letter-spacing: -0.3px;
+  margin-bottom: 5px;
+}
+.enterprise-desc { font-size: 13px; color: var(--gray-4); line-height: 1.55; }
+.enterprise-btn {
+  font-size: 14px; font-weight: 700;
+  color: var(--black); background: var(--white);
+  border: none; padding: 12px 22px;
+  border-radius: var(--radius-sm); cursor: pointer;
+  font-family: inherit; white-space: nowrap;
+  transition: opacity 0.15s; flex-shrink: 0;
+}
+.enterprise-btn:hover { opacity: 0.88; }
+
+/* ─── BETA CTA ────────────────────────────── */
+.beta-section { padding: 4.5rem 2rem; max-width: 500px; margin: 0 auto; }
+.badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; }
+.badge-hot {
+  font-size: 11px; font-weight: 700; padding: 4px 11px;
+  border-radius: 20px; background: var(--coral); color: var(--white);
+}
+.badge-limit {
+  font-size: 11px; font-weight: 500; padding: 4px 11px;
+  border-radius: 20px; background: var(--gray-1); color: var(--gray-6);
+}
+.beta-card {
+  background: var(--white); border: var(--border);
+  border-radius: var(--radius-xl); padding: 1.75rem;
+  margin-bottom: 12px;
+}
+.beta-eyebrow {
+  font-size: 11px; font-weight: 700; color: var(--coral);
+  letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 0.75rem;
+}
+.price-row {
+  display: flex; align-items: baseline;
+  gap: 10px; flex-wrap: wrap; margin-bottom: 4px;
+}
+.price-original { font-size: 15px; color: var(--gray-4); text-decoration: line-through; }
+.price-main {
+  font-size: 36px; font-weight: 700; color: var(--black);
+  line-height: 1; letter-spacing: -1.5px;
+}
+.price-unit { font-size: 14px; color: var(--gray-4); }
+.price-chip {
+  font-size: 11px; font-weight: 700; padding: 3px 10px;
+  border-radius: 20px; background: var(--coral); color: var(--white);
+}
+.guarantee-line { font-size: 12px; color: var(--gray-6); margin-top: 4px; }
+.guarantee-line strong { color: var(--black); font-weight: 700; }
+.beta-hr { border: none; border-top: var(--border-light); margin: 1.1rem 0; }
+.value-headline {
+  font-size: 15px; font-weight: 700; color: var(--black);
+  line-height: 1.55; margin-bottom: 6px;
+}
+.value-sub { font-size: 13px; color: var(--gray-6); line-height: 1.65; }
+
+.free-box {
+  background: var(--green-light);
+  border: 1px solid #b3e8d6;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem; margin-bottom: 12px;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.free-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); flex-shrink: 0; margin-top: 5px;
+}
+.free-title { font-size: 13px; font-weight: 700; color: var(--green-dark); margin-bottom: 2px; }
+.free-desc { font-size: 12px; color: var(--green); line-height: 1.55; }
+
+.warning-box {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px;
+  background: var(--coral-light); border: 1px solid var(--coral-mid);
+  border-radius: var(--radius-sm); margin-bottom: 1.25rem;
+}
+.warning-line-accent {
+  width: 3px; min-height: 32px; background: var(--coral);
+  border-radius: 2px; flex-shrink: 0; margin-top: 1px;
+}
+.warning-text { font-size: 12px; color: var(--coral-dark); line-height: 1.6; }
+
+.cta-primary {
+  display: block; width: 100%;
+  padding: 17px; border-radius: var(--radius-sm);
+  background: var(--coral); color: var(--white);
+  font-size: 16px; font-weight: 700;
+  border: none; cursor: pointer; font-family: inherit;
+  letter-spacing: -0.3px; text-decoration: none;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(216,90,48,0.28);
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+.cta-primary:hover {
+  background: var(--coral-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(216,90,48,0.36);
+}
+.sub-note { text-align: center; font-size: 11px; color: var(--gray-4); margin-top: 0.75rem; }
+
+/* ─── MODAL ───────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  visibility: hidden; opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+  pointer-events: none;
+}
+.modal-overlay.open { visibility: visible; opacity: 1; pointer-events: auto; }
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  width: 100%; max-width: 480px;
+  max-height: 90vh; overflow-y: auto;
+  animation: modalIn 0.22s ease;
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.modal-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.modal-title { font-size: 18px; font-weight: 700; color: var(--black); letter-spacing: -0.3px; }
+.modal-sub { font-size: 13px; color: var(--gray-6); margin-top: 4px; line-height: 1.5; }
+.modal-close {
+  background: var(--gray-1); border: none; cursor: pointer;
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--gray-6); flex-shrink: 0;
+  transition: background 0.12s;
+}
+.modal-close:hover { background: var(--gray-2); }
+
+.form-group { margin-bottom: 1rem; }
+.form-label {
+  display: block; font-size: 13px; font-weight: 500;
+  color: var(--black); margin-bottom: 5px;
+}
+.form-label span { color: var(--coral); margin-left: 2px; }
+.form-input, .form-textarea {
+  width: 100%; padding: 10px 12px;
+  font-size: 14px; font-family: inherit;
+  color: var(--black); background: var(--white);
+  border: var(--border); border-radius: var(--radius-sm);
+  outline: none; transition: border-color 0.15s; line-height: 1.5;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--coral); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--gray-2); }
+.form-textarea { resize: vertical; min-height: 100px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.form-submit {
+  width: 100%; padding: 13px;
+  background: var(--coral); color: var(--white);
+  font-size: 14px; font-weight: 700;
+  border: none; border-radius: var(--radius-sm);
+  cursor: pointer; font-family: inherit;
+  transition: background 0.15s; margin-top: 0.5rem;
+}
+.form-submit:hover { background: var(--coral-hover); }
+.form-submit:disabled { opacity: 0.45; cursor: not-allowed; }
+.form-note { font-size: 11px; color: var(--gray-4); text-align: center; margin-top: 0.6rem; }
+.form-success { text-align: center; padding: 1.5rem 0; }
+.form-success-icon { font-size: 36px; margin-bottom: 0.75rem; }
+.form-success-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
+.form-success-desc { font-size: 13px; color: var(--gray-6); line-height: 1.65; }
+
+/* ─── FOOTER ──────────────────────────────── */
+footer {
+  background: var(--gray-0);
+  border-top: var(--border-light);
+  padding: 2.5rem 2rem;
+}
+.footer-inner { max-width: 660px; margin: 0 auto; }
+.footer-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+.footer-brand {}
+.footer-logo {
+  display: flex; align-items: baseline; gap: 1px;
+  text-decoration: none; margin-bottom: 4px;
+}
+.footer-logo-main { font-size: 14px; font-weight: 700; color: var(--black); letter-spacing: -0.3px; }
+.footer-logo-pro {
+  font-size: 9px; font-weight: 700; color: var(--white);
+  background: var(--coral); padding: 1px 5px;
+  border-radius: 3px; letter-spacing: 0.3px;
+  text-transform: uppercase; margin-left: 3px;
+  vertical-align: middle; position: relative; top: -1px;
+}
+.footer-tagline { font-size: 12px; color: var(--gray-4); }
+.footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; padding-top: 2px; }
+.footer-links a { font-size: 12px; color: var(--gray-4); text-decoration: none; transition: color 0.12s; }
+.footer-links a:hover { color: var(--gray-6); }
+.biz-info { border-top: var(--border-light); padding-top: 1.25rem; }
+.biz-info p { font-size: 11px; color: var(--gray-4); line-height: 2; }
+.biz-info a { color: var(--gray-4); text-decoration: none; }
+.biz-info a:hover { color: var(--gray-6); }
+.footer-copy { font-size: 11px; color: var(--gray-4); margin-top: 0.6rem; }
+
+/* ─── ANIMATION ───────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-badge  { animation: fadeUp 0.5s 0.00s ease both; }
+.hero-title  { animation: fadeUp 0.5s 0.08s ease both; }
+.hero-sub    { animation: fadeUp 0.5s 0.16s ease both; }
+.hero-btn    { animation: fadeUp 0.5s 0.22s ease both; }
+.hero-note   { animation: fadeUp 0.5s 0.28s ease both; }
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media (max-width: 580px) {
+  nav { padding: 0 1.25rem; }
+  .nav-inquiry { display: none; }
+  .hero { padding: 4rem 1.25rem 3.5rem; }
+  .section { padding: 3.5rem 1.25rem; }
+  .features { padding: 3.5rem 1.25rem; }
+  .pricing { padding: 3.5rem 1.25rem; }
+  .beta-section { padding: 3.5rem 1.25rem; }
+  footer { padding: 2rem 1.25rem; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .enterprise-box { flex-direction: column; align-items: flex-start; }
+  .form-row { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -253,33 +526,58 @@
     <span class="nav-logo-main">닥터체크</span>
     <span class="nav-logo-pro">Pro</span>
   </a>
-  <a href="https://www.drcheckpro.com" class="nav-login">로그인</a>
+  <div class="nav-right">
+    <button class="nav-inquiry" id="open-modal-btn">기업 문의</button>
+    <a href="https://www.drcheckpro.com" class="nav-login">로그인</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow"><div class="hero-dot"></div>제약·의료 영업사원 전용</div>
-  <h1 class="hero-title">병원 홈페이지 뒤지는 시간,<br><em>영업에 쓰세요.</em></h1>
-  <p class="hero-sub">진료시간 확인부터 방문 계획, 활동 결과 기록까지.<br>영업사원에게 꼭 필요한 것만 담았습니다.</p>
-  <a href="https://www.drcheckpro.com" class="hero-cta">닥터체크Pro 시작하기</a>
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    제약·의료 영업사원 전용
+  </div>
+  <h1 class="hero-title">
+    병원 홈페이지 뒤지는 시간,<br><em>영업에 쓰세요.</em>
+  </h1>
+  <p class="hero-sub">
+    진료시간 확인부터 방문 계획, 활동 결과 기록까지.<br>
+    영업사원에게 꼭 필요한 것만 담았습니다.
+  </p>
+  <a href="https://www.drcheckpro.com" class="hero-btn">
+    닥터체크Pro 시작하기 →
+  </a>
   <p class="hero-note">5월 정식 출시 전까지 완전 무료</p>
 </section>
 
-<hr class="section-divider">
+<hr class="divider">
 
 <!-- PAIN -->
 <section class="section">
   <p class="section-label">이런 불편함, 있지 않으셨나요</p>
   <h2 class="section-title">매일 반복되는<br>비효율을 없앱니다</h2>
   <div class="pain-list">
-    <div class="pain-item"><span class="pain-icon">🔍</span><span class="pain-text">병원마다 홈페이지 들어가서 진료시간 일일이 확인하는 것</span></div>
-    <div class="pain-item"><span class="pain-icon">📋</span><span class="pain-text">엑셀·메모앱 여기저기 흩어진 방문 기록과 고객 정보</span></div>
-    <div class="pain-item"><span class="pain-icon">📅</span><span class="pain-text">이번 달 어느 병원을 얼마나 돌았는지 한눈에 파악이 안 되는 것</span></div>
-    <div class="pain-item"><span class="pain-icon">📝</span><span class="pain-text">방문 후 활동 결과를 따로 정리해야 하는 번거로움</span></div>
+    <div class="pain-item">
+      <div class="pain-num">1</div>
+      <span class="pain-text">병원마다 홈페이지 들어가서 진료시간 일일이 확인하는 것</span>
+    </div>
+    <div class="pain-item">
+      <div class="pain-num">2</div>
+      <span class="pain-text">엑셀·메모앱 여기저기 흩어진 방문 기록과 고객 정보</span>
+    </div>
+    <div class="pain-item">
+      <div class="pain-num">3</div>
+      <span class="pain-text">이번 달 어느 병원을 얼마나 돌았는지 한눈에 파악이 안 되는 것</span>
+    </div>
+    <div class="pain-item">
+      <div class="pain-num">4</div>
+      <span class="pain-text">방문 후 활동 결과를 따로 정리해야 하는 번거로움</span>
+    </div>
   </div>
 </section>
 
-<hr class="section-divider">
+<hr class="divider">
 
 <!-- FEATURES -->
 <section class="features">
@@ -287,28 +585,32 @@
     <p class="section-label">주요 기능</p>
     <h2 class="section-title">영업 루틴을<br>하나로 정리합니다</h2>
     <p class="section-sub">닥터체크Pro 하나로 하루 영업 흐름을 완성하세요.</p>
-    <div class="feature-list">
-      <div class="feature-item">
-        <div class="feature-num">1</div>
-        <div><div class="feature-title">병원별 진료시간 관리</div><div class="feature-desc">담당 병원의 진료시간을 직접 등록하고, 오늘 방문 가능한 곳만 빠르게 확인하세요.</div></div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🕐</div>
+        <div class="feature-title">병원별 진료시간 관리</div>
+        <div class="feature-desc">담당 병원의 진료시간을 직접 등록하고, 오늘 방문 가능한 곳만 빠르게 확인하세요.</div>
       </div>
-      <div class="feature-item">
-        <div class="feature-num">2</div>
-        <div><div class="feature-title">방문 일정 계획 & 결과 기록</div><div class="feature-desc">활동 계획을 세우고, 방문 후 결과를 바로 기록합니다. 모든 이력이 자동으로 쌓입니다.</div></div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <div class="feature-title">방문 일정 계획 & 결과 기록</div>
+        <div class="feature-desc">활동 계획을 세우고, 방문 후 결과를 바로 기록합니다. 모든 이력이 자동으로 쌓입니다.</div>
       </div>
-      <div class="feature-item">
-        <div class="feature-num">3</div>
-        <div><div class="feature-title">고객(병원) 정보 통합 관리</div><div class="feature-desc">병원명, 담당 원장, 연락처, 방문 이력을 한 곳에서 관리합니다.</div></div>
+      <div class="feature-card">
+        <div class="feature-icon">🏥</div>
+        <div class="feature-title">고객(병원) 정보 통합 관리</div>
+        <div class="feature-desc">병원명, 담당 원장, 연락처, 방문 이력을 한 곳에서 관리합니다.</div>
       </div>
-      <div class="feature-item">
-        <div class="feature-num">4</div>
-        <div><div class="feature-title">활동 데이터 엑셀 내보내기</div><div class="feature-desc">월별 활동 데이터를 엑셀로 내보내 보고서 작성에 바로 활용하세요.</div></div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">활동 데이터 엑셀 내보내기</div>
+        <div class="feature-desc">월별 활동 데이터를 엑셀로 내보내 보고서 작성에 바로 활용하세요.</div>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="section-divider">
+<hr class="divider">
 
 <!-- PRICING -->
 <section class="pricing" id="pricing">
@@ -318,47 +620,59 @@
 
   <div class="pricing-grid">
     <div class="plan-card featured">
-      <div class="plan-badge">선착순 200명 한정</div>
+      <div class="plan-top-badge">선착순 200명 한정</div>
       <div class="plan-name">베타 멤버</div>
-      <div class="plan-price-row"><span class="plan-price">4,950</span><span class="plan-unit">원/월</span></div>
+      <div class="plan-price-row">
+        <span class="plan-price">4,950</span>
+        <span class="plan-unit">원/월</span>
+      </div>
       <div class="plan-original">19,800원</div>
-      <div class="plan-discount">75% 할인 · 평생 보장</div>
+      <div class="plan-chip">75% 할인 · 평생 보장</div>
       <hr class="plan-divider">
       <div class="plan-desc">지금 가입하면 정식 출시 후에도 이 가격이 영구 적용됩니다.</div>
-      <span class="plan-tag">5월 출시 전까지 무료</span>
+      <span class="plan-tag green">5월 출시 전까지 무료</span>
     </div>
+
     <div class="plan-card">
       <div class="plan-name">얼리버드</div>
-      <div class="plan-price-row"><span class="plan-price">9,900</span><span class="plan-unit">원/월</span></div>
+      <div class="plan-price-row">
+        <span class="plan-price">9,900</span>
+        <span class="plan-unit">원/월</span>
+      </div>
       <div class="plan-original">19,800원</div>
-      <div class="plan-discount">50% 할인</div>
+      <div class="plan-chip gray">50% 할인</div>
       <hr class="plan-divider">
       <div class="plan-desc">베타 마감 후 2026년 7월 31일까지 가입 시 적용됩니다.</div>
-      <span class="plan-tag-gray">~2026년 7월 31일</span>
+      <span class="plan-tag gray">~2026년 7월 31일</span>
     </div>
+
     <div class="plan-card">
       <div class="plan-name">정식가</div>
-      <div class="plan-price-row"><span class="plan-price">19,800</span><span class="plan-unit">원/월</span></div>
+      <div class="plan-price-row">
+        <span class="plan-price">19,800</span>
+        <span class="plan-unit">원/월</span>
+      </div>
       <div class="plan-original" style="visibility:hidden;">-</div>
-      <div class="plan-discount" style="visibility:hidden;">-</div>
+      <div class="plan-chip gray" style="visibility:hidden;">-</div>
       <hr class="plan-divider">
       <div class="plan-desc">2026년 8월 1일부터 신규 가입 시 적용되는 기본 요금입니다.</div>
-      <span class="plan-tag-gray">2026년 8월~</span>
+      <span class="plan-tag gray">2026년 8월~</span>
     </div>
   </div>
 
   <p class="vat-note">* 모든 가격은 부가세(VAT) 포함 금액입니다.</p>
 
   <div class="enterprise-box">
-    <div>
+    <div class="enterprise-left">
+      <div class="enterprise-eyebrow">Enterprise</div>
       <div class="enterprise-title">팀·기업 도입을 검토하고 계신가요?</div>
       <div class="enterprise-desc">영업팀 단위 도입, 계정 일괄 관리 등 기업 맞춤 플랜을 제공합니다.</div>
     </div>
-    <button class="enterprise-btn" id="open-modal-btn">도입 문의하기 →</button>
+    <button class="enterprise-btn" id="open-modal-btn2">도입 문의하기 →</button>
   </div>
 </section>
 
-<hr class="section-divider">
+<hr class="divider">
 
 <!-- BETA CTA -->
 <section class="beta-section" id="beta">
@@ -372,27 +686,28 @@
       <span class="price-original">19,800원</span>
       <span class="price-main">4,950</span>
       <span class="price-unit">원/월</span>
-      <span class="discount-pill">75% 할인</span>
+      <span class="price-chip">75% 할인</span>
     </div>
     <div class="guarantee-line">지금 가입하면 <strong>이 가격이 평생 유지</strong>됩니다</div>
-    <hr class="beta-divider">
+    <hr class="beta-hr">
     <div class="value-headline">진료시간 확인부터 방문 계획까지,<br>더 이상 병원 홈페이지를 뒤지지 않아도 됩니다.</div>
     <div class="value-sub">방문 1건만 더 성사시켜도 본전, 그 이상은 순수 수익입니다.</div>
   </div>
+
   <div class="free-box">
     <div class="free-dot"></div>
     <div>
-      <div class="free-box-title">5월 정식 출시 전까지 완전 무료</div>
-      <div class="free-box-desc">지금 가입하고 출시 전까지 모든 기능을 무료로 사용하세요.</div>
+      <div class="free-title">5월 정식 출시 전까지 완전 무료</div>
+      <div class="free-desc">지금 가입하고 출시 전까지 모든 기능을 무료로 사용하세요.</div>
     </div>
   </div>
-  <div class="warning-line">
-    <div class="warning-accent"></div>
-    <span>베타 마감 후에는 이 가격으로 다시 가입할 수 없습니다. 정식 출시 시 월 19,800원이 적용됩니다.</span>
+
+  <div class="warning-box">
+    <div class="warning-line-accent"></div>
+    <div class="warning-text">베타 마감 후에는 이 가격으로 다시 가입할 수 없습니다. 정식 출시 시 월 19,800원이 적용됩니다.</div>
   </div>
-  <a href="https://www.drcheckpro.com" class="cta-primary">
-    닥터체크Pro 바로 시작하기 <em class="cta-arrow">→</em>
-  </a>
+
+  <a href="https://www.drcheckpro.com" class="cta-primary">닥터체크Pro 바로 시작하기 →</a>
   <p class="sub-note">언제든 해지 가능</p>
 </section>
 
@@ -400,9 +715,12 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div>
-        <div class="footer-logo">YUNOLABS</div>
-        <div class="footer-logo-sub">제약·의료 영업을 더 스마트하게</div>
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <span class="footer-logo-main">닥터체크</span>
+          <span class="footer-logo-pro">Pro</span>
+        </a>
+        <div class="footer-tagline">제약·의료 영업을 더 스마트하게</div>
       </div>
       <div class="footer-links">
         <a href="https://www.drcheckpro.com">닥터체크Pro</a>
@@ -416,14 +734,14 @@
         주식회사 유노랩스 (YUNOLABS.INC) &nbsp;|&nbsp; 대표이사: 이윤호<br>
         사업자등록번호: 824-88-03207 &nbsp;|&nbsp; 통신판매신고: 제2025-다산-0943호<br>
         주소: 경기도 남양주시 다산중앙로145번길 15, 807호<br>
-        고객센터: <a href="tel:05040500979">0504-050-0979</a> &nbsp;|&nbsp; 이메일: <a href="/cdn-cgi/l/email-protection#166f6378797a777465387f787556717b777f7a3875797b"><span class="__cf_email__" data-cfemail="5b222e3534373a3928753235381b3c363a323775383436">[email&#160;protected]</span></a>
+        고객센터: <a href="tel:05040500979">0504-050-0979</a> &nbsp;|&nbsp; 이메일: <a href="mailto:yunolabs.inc@gmail.com">yunolabs.inc@gmail.com</a>
       </p>
       <p class="footer-copy">© 2026 주식회사 유노랩스. All rights reserved.</p>
     </div>
   </div>
 </footer>
 
-<!-- ENTERPRISE MODAL -->
+<!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal" id="modal">
     <div class="modal-header">
@@ -433,7 +751,6 @@
       </div>
       <button class="modal-close" id="modal-close-btn">✕</button>
     </div>
-
     <div id="form-wrap">
       <div class="form-row">
         <div class="form-group">
@@ -451,7 +768,7 @@
           <input class="form-input" type="tel" id="f-phone" placeholder="010-0000-0000" />
         </div>
         <div class="form-group">
-          <label class="form-label">이메일 주소<span>*</span></label>
+          <label class="form-label">이메일<span>*</span></label>
           <input class="form-input" type="email" id="f-email" placeholder="example@company.com" />
         </div>
       </div>
@@ -466,7 +783,6 @@
       <button class="form-submit" id="submit-btn">문의 보내기</button>
       <p class="form-note">* 표시는 필수 입력 항목입니다.</p>
     </div>
-
     <div id="form-success" class="form-success" style="display:none;">
       <div class="form-success-icon">✅</div>
       <div class="form-success-title">문의가 접수되었습니다</div>
@@ -477,10 +793,11 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var overlay = document.getElementById('modal-overlay');
-  var openBtn = document.getElementById('open-modal-btn');
-  var closeBtn = document.getElementById('modal-close-btn');
-  var submitBtn = document.getElementById('submit-btn');
+  var overlay    = document.getElementById('modal-overlay');
+  var openBtn    = document.getElementById('open-modal-btn');
+  var openBtn2   = document.getElementById('open-modal-btn2');
+  var closeBtn   = document.getElementById('modal-close-btn');
+  var submitBtn  = document.getElementById('submit-btn');
   var footerLink = document.getElementById('footer-inquiry-link');
 
   function openModal() {
@@ -492,14 +809,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.overflow = '';
   }
 
-  if (openBtn) openBtn.addEventListener('click', openModal);
+  if (openBtn)    openBtn.addEventListener('click', openModal);
+  if (openBtn2)   openBtn2.addEventListener('click', openModal);
+  if (closeBtn)   closeBtn.addEventListener('click', closeModal);
   if (footerLink) footerLink.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
   overlay.addEventListener('click', function(e) {
     if (e.target === overlay) closeModal();
   });
-
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
   });
@@ -529,7 +846,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     submitBtn.disabled = true;
     submitBtn.textContent = '전송 중...';
-
     window.location.href = 'mailto:yunolabs.inc@gmail.com?subject=' + subject + '&body=' + body;
 
     setTimeout(function() {
@@ -539,3 +855,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+</body>
+</html>
