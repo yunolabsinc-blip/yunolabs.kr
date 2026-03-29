@@ -136,20 +136,20 @@ nav {
 .divider { border: none; border-top: var(--border-light); }
 
 /* ─── SECTION BASE ────────────────────────── */
-.section { padding: 4.5rem 2rem; max-width: 660px; margin: 0 auto; }
+.section { padding: 4.5rem 2rem; max-width: 660px; margin: 0 auto; text-align: left; }
 .section-label {
   font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
   text-transform: uppercase; color: var(--coral);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.6rem; display: block;
 }
 .section-title {
   font-size: clamp(22px, 4vw, 28px); font-weight: 700;
   letter-spacing: -0.6px; line-height: 1.3;
-  margin-bottom: 0.9rem; color: var(--black);
+  margin-bottom: 0.9rem; color: var(--black); text-align: left;
 }
 .section-sub {
   font-size: 14px; color: var(--gray-6);
-  line-height: 1.75; margin-bottom: 2rem;
+  line-height: 1.75; margin-bottom: 2rem; text-align: left;
 }
 
 /* ─── PAIN ────────────────────────────────── */
@@ -173,7 +173,7 @@ nav {
 
 /* ─── FEATURES ────────────────────────────── */
 .features { background: var(--gray-0); padding: 4.5rem 2rem; }
-.features-inner { max-width: 660px; margin: 0 auto; }
+.features-inner { max-width: 660px; margin: 0 auto; text-align: left; }
 .feature-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -200,7 +200,7 @@ nav {
 .feature-desc { font-size: 13px; color: var(--gray-6); line-height: 1.6; }
 
 /* ─── PRICING ─────────────────────────────── */
-.pricing { padding: 4.5rem 2rem; max-width: 700px; margin: 0 auto; }
+.pricing { padding: 4.5rem 2rem; max-width: 700px; margin: 0 auto; text-align: left; }
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -231,7 +231,7 @@ nav {
 .plan-name {
   font-size: 12px; font-weight: 700;
   color: var(--gray-4); letter-spacing: 0.5px;
-  text-transform: uppercase; margin-bottom: 0.75rem;
+  text-transform: uppercase; margin-bottom: 0.75rem; text-align: left;
 }
 .plan-card.featured .plan-name { color: var(--coral); }
 .plan-price-row {
@@ -245,7 +245,7 @@ nav {
 .plan-unit { font-size: 12px; color: var(--gray-4); }
 .plan-original {
   font-size: 12px; color: var(--gray-4);
-  text-decoration: line-through; margin-bottom: 4px; min-height: 18px;
+  text-decoration: line-through; margin-bottom: 4px; min-height: 18px; text-align: left;
 }
 .plan-chip {
   display: inline-block; font-size: 10px; font-weight: 700;
@@ -257,7 +257,7 @@ nav {
   background: var(--gray-1); color: var(--gray-6);
 }
 .plan-divider { border: none; border-top: var(--border-light); margin: 0.9rem 0; }
-.plan-desc { font-size: 12px; color: var(--gray-6); line-height: 1.6; flex: 1; }
+.plan-desc { font-size: 12px; color: var(--gray-6); line-height: 1.6; flex: 1; text-align: left; }
 .plan-tag {
   display: inline-block; font-size: 11px; font-weight: 500;
   padding: 3px 9px; border-radius: 20px; margin-top: 0.75rem;
@@ -299,7 +299,7 @@ nav {
 .enterprise-btn:hover { opacity: 0.88; }
 
 /* ─── BETA CTA ────────────────────────────── */
-.beta-section { padding: 4.5rem 2rem; max-width: 500px; margin: 0 auto; }
+.beta-section { padding: 4.5rem 2rem; max-width: 500px; margin: 0 auto; text-align: left; }
 .badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; }
 .badge-hot {
   font-size: 11px; font-weight: 700; padding: 4px 11px;
@@ -316,7 +316,7 @@ nav {
 }
 .beta-eyebrow {
   font-size: 11px; font-weight: 700; color: var(--coral);
-  letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 0.75rem;
+  letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 0.75rem; text-align: left;
 }
 .price-row {
   display: flex; align-items: baseline;
@@ -337,9 +337,9 @@ nav {
 .beta-hr { border: none; border-top: var(--border-light); margin: 1.1rem 0; }
 .value-headline {
   font-size: 15px; font-weight: 700; color: var(--black);
-  line-height: 1.55; margin-bottom: 6px;
+  line-height: 1.55; margin-bottom: 6px; text-align: left;
 }
-.value-sub { font-size: 13px; color: var(--gray-6); line-height: 1.65; }
+.value-sub { font-size: 13px; color: var(--gray-6); line-height: 1.65; text-align: left; }
 
 .free-box {
   background: var(--green-light);
@@ -542,7 +542,7 @@ footer {
     병원 홈페이지 뒤지는 시간,<br><em>영업에 쓰세요.</em>
   </h1>
   <p class="hero-sub">
-    진료시간 확인부터 방문 계획, 활동 결과 기록까지.<br>
+    진료시간표를 보면서 방문 일정을 바로 잡고, 활동 결과까지 한 곳에 기록합니다.<br>
     영업사원에게 꼭 필요한 것만 담았습니다.
   </p>
   <a href="https://www.drcheckpro.com" class="hero-btn">
@@ -593,8 +593,8 @@ footer {
       </div>
       <div class="feature-card">
         <div class="feature-icon">📅</div>
-        <div class="feature-title">방문 일정 계획 & 결과 기록</div>
-        <div class="feature-desc">활동 계획을 세우고, 방문 후 결과를 바로 기록합니다. 모든 이력이 자동으로 쌓입니다.</div>
+        <div class="feature-title">진료시간표 보고 방문 일정 간편 계획</div>
+        <div class="feature-desc">등록된 병원 진료시간표를 보면서 방문 일정을 바로 선택하고, 방문 후 결과까지 기록합니다. 모든 이력이 자동으로 쌓입니다.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🏥</div>
@@ -734,7 +734,7 @@ footer {
         주식회사 유노랩스 (YUNOLABS.INC) &nbsp;|&nbsp; 대표이사: 이윤호<br>
         사업자등록번호: 824-88-03207 &nbsp;|&nbsp; 통신판매신고: 제2025-다산-0943호<br>
         주소: 경기도 남양주시 다산중앙로145번길 15, 807호<br>
-        고객센터: <a href="tel:05040500979">0504-050-0979</a> &nbsp;|&nbsp; 이메일: <a href="mailto:yunolabs.inc@gmail.com">yunolabs.inc@gmail.com</a>
+        고객센터: <a href="tel:05040500979">0504-050-0979</a> &nbsp;|&nbsp; 이메일: <a href="/cdn-cgi/l/email-protection#b9c0ccd7d6d5d8dbca97d0d7daf9ded4d8d0d597dad6d4"><span class="__cf_email__" data-cfemail="3a434f5455565b5849145354597a5d575b535614595557">[email&#160;protected]</span></a>
       </p>
       <p class="footer-copy">© 2026 주식회사 유노랩스. All rights reserved.</p>
     </div>
@@ -791,7 +791,7 @@ footer {
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
   var overlay    = document.getElementById('modal-overlay');
   var openBtn    = document.getElementById('open-modal-btn');
@@ -846,14 +846,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     submitBtn.disabled = true;
     submitBtn.textContent = '전송 중...';
-    window.location.href = 'mailto:yunolabs.inc@gmail.com?subject=' + subject + '&body=' + body;
-
-    setTimeout(function() {
-      document.getElementById('form-wrap').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    }, 800);
-  });
-});
-</script>
-</body>
-</html>
+    window.location.href = 'mailto:yunolabs.inc@gmail.com?subjec
