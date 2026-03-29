@@ -89,16 +89,20 @@
 
   /* MODAL OVERLAY */
   .modal-overlay {
-    display: none;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.45);
     z-index: 200;
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s, visibility 0.2s;
+    pointer-events: none;
   }
-  .modal-overlay.open { display: flex; }
+  .modal-overlay.open { visibility: visible; opacity: 1; pointer-events: auto; }
   .modal {
     background: var(--white);
     border-radius: var(--radius-lg);
