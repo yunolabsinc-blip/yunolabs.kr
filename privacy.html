@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>개인정보처리방침 — 닥터체크Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #111110; --gray-6: #555552; --gray-4: #9c9a94;
+  --gray-1: #eeecea; --gray-0: #f7f6f3; --white: #ffffff;
+  --coral: #D85A30; --coral-light: #fdf0eb;
+  --border: 1px solid #e8e5e0;
+}
+body {
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  background: var(--gray-0); color: var(--black);
+  font-size: 15px; line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+nav {
+  background: var(--white); border-bottom: var(--border);
+  padding: 0 2rem; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: baseline; text-decoration: none; }
+.nav-logo-main { font-size: 16px; font-weight: 700; color: var(--black); letter-spacing: -0.5px; }
+.nav-logo-pro {
+  font-size: 10px; font-weight: 700; color: var(--white);
+  background: var(--coral); padding: 2px 6px; border-radius: 4px;
+  letter-spacing: 0.4px; text-transform: uppercase; margin-left: 4px;
+  vertical-align: middle; position: relative; top: -1px;
+}
+.back-link {
+  font-size: 13px; color: var(--gray-4); text-decoration: none;
+  display: flex; align-items: center; gap: 4px; transition: color 0.12s;
+}
+.back-link:hover { color: var(--gray-6); }
+
+.container { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+.doc-header { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: var(--border); }
+.doc-tag {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  color: var(--coral); background: var(--coral-light);
+  padding: 3px 10px; border-radius: 20px;
+  letter-spacing: 0.5px; margin-bottom: 0.75rem;
+}
+.doc-title { font-size: 26px; font-weight: 700; letter-spacing: -0.6px; margin-bottom: 0.4rem; }
+.doc-date { font-size: 13px; color: var(--gray-4); }
+
+.article { margin-bottom: 2rem; }
+.article-title {
+  font-size: 15px; font-weight: 700; color: var(--black);
+  margin-bottom: 0.75rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.article-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--coral); color: var(--white);
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.article-body { font-size: 14px; color: var(--gray-6); line-height: 1.8; padding-left: 30px; }
+.article-body ul { list-style: none; padding: 0; }
+.article-body ul li { padding: 4px 0; padding-left: 14px; position: relative; }
+.article-body ul li::before {
+  content: ''; position: absolute; left: 0; top: 12px;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gray-4);
+}
+.article-body p { margin-bottom: 0.5rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 0.25rem; }
+th { background: var(--gray-1); padding: 10px 12px; text-align: left; font-weight: 700; color: var(--black); border: var(--border); }
+td { padding: 10px 12px; border: var(--border); color: var(--gray-6); vertical-align: top; line-height: 1.6; }
+
+.contact-box {
+  background: var(--white); border: var(--border);
+  border-radius: 12px; padding: 1.25rem 1.5rem; margin-top: 0.5rem;
+}
+.contact-box p { font-size: 13px; color: var(--gray-6); line-height: 1.9; }
+.contact-box a { color: var(--coral); text-decoration: none; }
+
+footer {
+  text-align: center; padding: 2rem;
+  border-top: var(--border); background: var(--white);
+}
+footer p { font-size: 11px; color: var(--gray-4); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-logo-main">닥터체크</span>
+    <span class="nav-logo-pro">Pro</span>
+  </a>
+  <a href="/" class="back-link">← 메인으로</a>
+</nav>
+
+<div class="container">
+  <div class="doc-header">
+    <div class="doc-tag">개인정보처리방침</div>
+    <div class="doc-title">닥터체크Pro 개인정보처리방침</div>
+    <div class="doc-date">시행일: 2026년 4월 1일</div>
+  </div>
+
+  <div class="article">
+    <div class="article-title"><div class="article-num">1</div>수집하는 개인정보</div>
+    <div class="article-body">
+      <table>
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th>수집 목적</th>
+            <th>보유 기간</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>이름, 이메일</td>
+            <td>회원가입 및 서비스 제공</td>
+            <td>탈퇴 시 즉시 삭제</td>
+          </tr>
+          <tr>
+            <td>회사명, 직책</td>
+            <td>서비스 개인화</td>
+            <td>탈퇴 시 즉시 삭제</td>
+          </tr>
+          <tr>
+            <td>방문 활동 데이터</td>
+            <td>서비스 제공</td>
+            <td>탈퇴 시 즉시 삭제</td>
+          </tr>
+          <tr>
+            <td>접속 로그, 쿠키</td>
+            <td>서비스 운영 및 보안</td>
+            <td>1년</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="article-title"><div class="article-num">2</div>개인정보 삭제 및 제3자 제공</div>
+    <div class="article-body">
+      <p>회사는 이용자의 개인정보를 제3자에게 제공하지 않습니다. 단, 법령에 의한 요청에는 예외입니다.</p>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="article-title"><div class="article-num">3</div>안전성 확보</div>
+    <div class="article-body">
+      <ul>
+        <li>데이터는 Supabase(AWS) 서버에 암호화하여 저장됩니다.</li>
+        <li>비밀번호는 암호화되어 저장되며 조회 불가능합니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="article-title"><div class="article-num">4</div>정보주체의 권리</div>
+    <div class="article-body">
+      <ul>
+        <li>본인의 개인정보 열람, 정정, 삭제를 요청할 수 있습니다.</li>
+        <li>문의: <a href="mailto:yunolabs.inc@gmail.com" style="color:var(--coral);">yunolabs.inc@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="article-title"><div class="article-num">5</div>문의처</div>
+    <div class="article-body">
+      <div class="contact-box">
+        <p>
+          개인정보 보호 책임자: 이윤호 (주식회사 유노랩스)<br>
+          이메일: <a href="mailto:yunolabs.inc@gmail.com">yunolabs.inc@gmail.com</a><br>
+          고객센터: <a href="tel:05040500979">0504-050-0979</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 주식회사 유노랩스. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
