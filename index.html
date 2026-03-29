@@ -35,8 +35,8 @@
   .hero-title { font-size: clamp(26px, 6vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.8px; color: var(--black); margin-bottom: 1rem; }
   .hero-title em { font-style: normal; color: var(--coral); }
   .hero-sub { font-size: 15px; color: var(--gray-5); line-height: 1.7; margin-bottom: 2rem; }
-  .hero-cta { display: inline-block; background: var(--black); color: var(--white); font-size: 15px; font-weight: 500; padding: 14px 32px; border-radius: var(--radius-sm); text-decoration: none; transition: opacity 0.15s; }
-  .hero-cta:hover { opacity: 0.8; }
+  .hero-cta { display: inline-block; background: var(--coral); color: var(--white); font-size: 15px; font-weight: 700; padding: 14px 32px; border-radius: var(--radius-sm); text-decoration: none; transition: background 0.15s, transform 0.1s; box-shadow: 0 4px 20px rgba(216,90,48,0.28); }
+  .hero-cta:hover { background: var(--coral-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(216,90,48,0.35); }
   .hero-note { font-size: 12px; color: var(--gray-3); margin-top: 0.75rem; }
 
   /* SHARED */
@@ -412,7 +412,7 @@
         주식회사 유노랩스 (YUNOLABS.INC) &nbsp;|&nbsp; 대표이사: 이윤호<br>
         사업자등록번호: 824-88-03207 &nbsp;|&nbsp; 통신판매신고: 제2025-다산-0943호<br>
         주소: 경기도 남양주시 다산중앙로145번길 15, 807호<br>
-        고객센터: <a href="tel:05040500979">0504-050-0979</a> &nbsp;|&nbsp; 이메일: <a href="mailto:yunolabs.inc@gmail.com">yunolabs.inc@gmail.com</a>
+        고객센터: <a href="tel:05040500979">0504-050-0979</a> &nbsp;|&nbsp; 이메일: <a href="/cdn-cgi/l/email-protection#166f6378797a777465387f787556717b777f7a3875797b"><span class="__cf_email__" data-cfemail="5b222e3534373a3928753235381b3c363a323775383436">[email&#160;protected]</span></a>
       </p>
       <p class="footer-copy">© 2026 주식회사 유노랩스. All rights reserved.</p>
     </div>
@@ -471,7 +471,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function openModal() {
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -514,14 +514,4 @@ function submitForm() {
   btn.disabled = true;
   btn.textContent = '전송 중...';
 
-  window.location.href = 'mailto:yunolabs.inc@gmail.com?subject=' + subject + '&body=' + body;
-
-  setTimeout(function() {
-    document.getElementById('form-wrap').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-  }, 800);
-}
-</script>
-
-</body>
-</html>
+  window.location.href = 'mailto:yunolabs.inc@g
